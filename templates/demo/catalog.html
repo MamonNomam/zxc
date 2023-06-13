@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="categorys">
+    <h1 class="main-title">Каталог</h1>
+    <p>
+    <div class="filtr">Фильтр по категориям:</div>
+    <div class="tresh">
+    {% if not request.GET.category %}
+        Все
+    {% else %}
+        <a class="othertext" href="{% url 'catalog' %}?order_by={{ request.GET.order_by }}">Все</a>
+    {% endif %}
+    {% for item in category %}
+        <a class="othertext" href="{% url 'catalog' %}?category={{ item.pk }}&order_by={{ request.GET.order_by }}">{{ item.name }}</a>
+    {% endfor %}
+    </p>
+    </div>
+
+    <p>
+    <div class="filtr">Сортировка:</div>
+    <div class="tresh">
+    <a class="othertext" href="{% url 'catalog' %}?order_by=name&category={{ request.GET.category }}">Наименование</a>
+    <a class="othertext" href="{% url 'catalog' %}?order_by=year&category={{ request.GET.category }}">Год производства</a>
+    <a class="othertext" href="{% url 'catalog' %}?order_by=price&category={{ request.GET.category }}">Цена</a>
+    </div>
+    </p>
+    </div>
+
+    <section class="products">
+
+    {% for item in products %}
+        <div class="d-flex">
+            <img class="tovarimg" src="{{ item.photo_file.url }}" alt="{{ item.photo_file }}" class="img-thumbnail" width="200">
+            <div class="p-2">
+                <h3><a class="product_name" href="{{ item.get_absolute_url }}">{{ item.name }}</a> <a class="price">{{ item.price }}</a> р.</h3>
+                <div>
+                    Год производства: {{ item.year }} <br> Категория: {{ item.category }} <br> Остаток: {{ item.count }}
+                </div>
+                {% if user.is_authenticated %}
+                    <a class="vkorzinu" href="#" onclick="toCart(this,{{ item.pk }})">В корзину</a>
+                {% endif %}
+            </div>
+        </div>
+    
+    {% endfor %}
+    </section>
+    <script>
+        toCart = async (target, pk) => {
+            const res = await fetch(`/to_cart/${pk}`).then(res => res.json());
+            const message = document.createElement('div');
+            if (res.count) {
+                message.innerHTML = `Товар добавлен в корзину. Общее колчество товаров в корзине: ${res.count}`;
+            } else {
+                message.innerHTML = 'Больше нельзя добавить';
+            }
+            target.parentElement.append(message);
+            setTimeout(() => message.remove(), 1000);
+
+        }
+    </script>
+
+
+{% endblock %}

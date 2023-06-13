@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% block title %}<title>Интернет-магазин</title>{% endblock %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+       <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+ 
+    <script src="{% static 'js/bootstrap.min.js' %}" defer></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+    <video autoplay loop muted class="bgvideo" id="bgvideo">
+        <source src="files/video.mp4" type="video/mp4"></source>
+       </video>
+    <div class="trueheader">
+    <div class="container">
+        <header class="header">
+            <div class="header_logo">
+                <img class="logo" src="../files/logo.png" alt="#">
+            </div>
+            <div class="header_link">
+                <a href="{% url 'catalog' %}">КАТАЛОГ</a>
+                <a href="{% url 'about' %}">О НАС</a>
+                <a href="{% url 'contact' %}">ГДЕ НАС НАЙТИ?</a>
+            </div>
+            <div class="header_button top_btn">
+            <a class="header_link" href="{% url 'orders' %}">ЗАКАЗЫ</a>
+            <a class="header_link" href="{% url 'cart' %}">КОРЗИНА</a>
+            <a class="header_link" href="{% url 'login' %}">ВОЙТИ</a>
+            </div>
+        </header>
+    </div>
+    </div>
+</body>
+</nav>
+<main role="main" class="container">
+    <div class="starter-template">
+        {% block content %}{% endblock %}
+    </div>
+</main>
+</div>
+ <footer class="footer">
+        <div class="container">
+            <div class="footer_card_wrapper">
+                <div class="footer_card firts_card">
+                    <div class="footer_card_icon_pay">
+                        <img src="../files/img/card1.jpg" alt="#">
+                        <img src="../files/img/card2.jpg" alt="#">
+                    </div>
+                    
+                    <div class="footer_card_social_description">
+                        <p>Подпишитесь на нас<br>в Youtube и Instagram</p>
+                        <p>Готовь свою тачку<br>и на прокачку!</p>
+                    </div>
+                </div>
+    
+                <div class="footer_card second_card">
+                    <div class="footer_description">
+                        <p>ТОО "Good Will Union"<br>БИН 180140034538<br>email:maks.deadmouse@gmail.com<br>Call центр: +7 906 133 80 80</p>
+                        <p>® "Shinobus"<br></p>
+                    </div>
+                </div>
+
+                <div class="footer_card third_card">
+                    <div class="footer_title">
+                        <p>Клиентам</p>
+                    </div>
+                    <div class="footer_link">
+                        <ul>
+                            <li><a href="#">Договор публичной Оферты</a></li>
+                            <li><a href="#">Политика конфидециальности</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer_card fourth_card">
+                    <div class="footer_title">
+                        <p>Информация</p>
+                    </div>
+                    <div class="footer_link">
+                        <ul>
+                            <li><a href="{% url 'catalog' %}">Каталог</a></li>
+                            <li><a href="{% url 'about' %}">О нас</a></li>
+                            <li><a href="{% url 'contact' %}">Где нас найти</a></li>
+                            <li><a >Режим работы 8:00 - 19:00</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
